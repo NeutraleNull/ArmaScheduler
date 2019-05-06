@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{972A6980-D01D-4B3B-AFBB-C39DE04A3B5F}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>ArmaSheduler</RootNamespace>
     <AssemblyName>ArmaSheduler</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -54,18 +57,33 @@
     <Compile Include="ArmaSheduler.Designer.cs">
       <DependentUpon>ArmaSheduler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Execeptions\SettingsFileReadExecption.cs" />
+    <Compile Include="BattleNET\BattleEyeLoginCredentials.cs" />
+    <Compile Include="BattleNET\BattlEyeClient.cs" />
+    <Compile Include="BattleNET\BattlEyeCommand.cs" />
+    <Compile Include="BattleNET\BattlEyeCommandResult.cs" />
+    <Compile Include="BattleNET\BattlEyeConnectionResult.cs" />
+    <Compile Include="BattleNET\BattlEyeDisconnectEventArgs.cs" />
+    <Compile Include="BattleNET\BattlEyeDisconnectionType.cs" />
+    <Compile Include="BattleNET\BattlEyeMessageEventArgs.cs" />
+    <Compile Include="BattleNET\BattlEyePacketType.cs" />
+    <Compile Include="BattleNET\CRC32.cs" />
+    <Compile Include="BattleNET\Helpers.cs" />
+    <Compile Include="Exceptions\SettingsFileReadExecption.cs" />
     <Compile Include="Models\ExecutionTasks.cs" />
     <Compile Include="Models\JsonModel.cs" />
     <Compile Include="Models\RepeatingService.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Shedule.cs" />
     <Compile Include="parser\SettingsFileReader.cs" />
+    <Compile Include="parser\Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sheduler\RconConnector.cs" />
+    <Compile Include="Sheduler\TaskSheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="BattleNET\BattleNET.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +92,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tasks\" />
+    <Content Include="BattleNET\BattleNET.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

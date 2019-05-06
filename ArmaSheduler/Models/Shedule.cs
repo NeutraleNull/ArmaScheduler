@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArmaSheduler.models
 {
-    class Shedule
+    public class Shedule
     {
         public TimeSpan time;
         public string rconCommand;
