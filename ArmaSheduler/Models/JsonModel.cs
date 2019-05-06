@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArmaSheduler.models
 {
-    class JsonModel
+    public class JsonModel
     {
         public Settings settings;
         public Shedule[] sheduledTasks;

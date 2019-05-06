@@ -1,6 +1,6 @@
 ﻿namespace ArmaSheduler.models
 {
-    class RepeatingService
+    public class RepeatingService
     {
         public int startupDelay;
         public int repeating; //-1 means loop
