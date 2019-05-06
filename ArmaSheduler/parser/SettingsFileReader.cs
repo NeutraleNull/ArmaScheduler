@@ -25,6 +25,7 @@ namespace ArmaSheduler.parser
                     try
                     {
                         file = JsonConvert.DeserializeObject<JsonModel>(reader.ReadToEnd());
+                        Validator.ValidateJsonModel(file);
                     }
                     catch
                     {

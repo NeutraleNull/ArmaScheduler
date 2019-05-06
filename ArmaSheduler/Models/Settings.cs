@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ArmaSheduler.models
 {
-    class Settings
+    public class Settings
     {
+        public string ip;
+        public int port;
+        public string password;
         public int repeat;
         public int timeout;
         public int hcCount;

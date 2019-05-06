@@ -28,6 +28,7 @@ namespace ArmaSheduler
                 new ArmaSheduler()
             };
             ServiceBase.Run(ServicesToRun);
+            Console.ReadKey();
         }
     }
 }
