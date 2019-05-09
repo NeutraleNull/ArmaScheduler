@@ -20,14 +20,15 @@ namespace ArmaSheduler
         static void Main()
         {
             AllocConsole();
-            SettingsFileReader reader = new SettingsFileReader();
-            reader.ReadSettingsFile();
+            //SettingsFileReader reader = new SettingsFileReader();
+            //reader.ReadSettingsFile();
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new ArmaSheduler()
             };
             ServiceBase.Run(ServicesToRun);
+            Console.WriteLine("Press any key to kill the console");
             Console.ReadKey();
         }
     }
