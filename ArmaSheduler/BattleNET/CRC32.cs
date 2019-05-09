@@ -8,7 +8,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     // ReSharper disable once InconsistentNaming
     internal class CRC32 : HashAlgorithm

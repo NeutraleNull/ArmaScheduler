@@ -5,7 +5,7 @@
  *  Some rights reserved. See license.txt, authors.txt.    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     enum BattlEyePacketType
     {

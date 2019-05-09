@@ -1,17 +1,17 @@
-﻿using ArmaSheduler.models;
-using ArmaSheduler.Sheduler;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ArmaScheduler.Models;
+using ArmaScheduler.Scheduler;
 
-namespace ArmaSheduler.parser
+namespace ArmaScheduler.Parser
 {
     public static class TaskCreator
     {
         public static void CreateTasks(JsonModel model)
         {
-            foreach (var item in model.sheduledTasks)
+            foreach (var item in model.scheduledTasks)
             {
                 if (item.rconCommand != null)
                 {

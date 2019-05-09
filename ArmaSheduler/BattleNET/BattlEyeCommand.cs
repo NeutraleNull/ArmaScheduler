@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     public enum BattlEyeCommand
     {

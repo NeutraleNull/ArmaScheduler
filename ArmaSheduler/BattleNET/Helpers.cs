@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     internal class Helpers
     {

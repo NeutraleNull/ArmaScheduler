@@ -7,7 +7,7 @@
 
 using System;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     public delegate void BattlEyeMessageEventHandler(BattlEyeMessageEventArgs args);
 

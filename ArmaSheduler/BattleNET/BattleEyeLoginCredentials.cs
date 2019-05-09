@@ -7,7 +7,7 @@
 
 using System.Net;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     public struct BattlEyeLoginCredentials
     {

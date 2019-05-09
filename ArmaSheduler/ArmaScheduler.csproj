@@ -53,11 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArmaSheduler.cs">
+    <Compile Include="ArmaScheduler.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ArmaSheduler.Designer.cs">
-      <DependentUpon>ArmaSheduler.cs</DependentUpon>
+    <Compile Include="ArmaScheduler.Designer.cs">
+      <DependentUpon>ArmaScheduler.cs</DependentUpon>
     </Compile>
     <Compile Include="BattleNET\BattleEyeLoginCredentials.cs" />
     <Compile Include="BattleNET\BattlEyeClient.cs" />
@@ -75,17 +75,17 @@
     <Compile Include="Models\JsonModel.cs" />
     <Compile Include="Models\RepeatingService.cs" />
     <Compile Include="Models\Settings.cs" />
-    <Compile Include="Models\Shedule.cs" />
-    <Compile Include="parser\SettingsFileReader.cs" />
-    <Compile Include="parser\TaskCreator.cs" />
-    <Compile Include="parser\Validator.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Parser\SettingsFileReader.cs" />
+    <Compile Include="Parser\TaskCreator.cs" />
+    <Compile Include="Parser\Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sheduler\ArmaServer.cs" />
-    <Compile Include="Sheduler\ProcessController.cs" />
-    <Compile Include="Sheduler\RconConnector.cs" />
-    <Compile Include="Sheduler\TaskService.cs" />
-    <Compile Include="Sheduler\TaskSheduler.cs" />
+    <Compile Include="Scheduler\ArmaServer.cs" />
+    <Compile Include="Scheduler\ProcessController.cs" />
+    <Compile Include="Scheduler\RconConnector.cs" />
+    <Compile Include="Scheduler\TaskService.cs" />
+    <Compile Include="Scheduler\TaskSheduler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,8 +93,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ArmaSheduler.resx">
-      <DependentUpon>ArmaSheduler.cs</DependentUpon>
+    <EmbeddedResource Include="ArmaScheduler.resx">
+      <DependentUpon>ArmaScheduler.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
-﻿using ArmaSheduler.parser;
-using ArmaSheduler.Sheduler;
+﻿using ArmaScheduler.Parser;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,12 +8,13 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using ArmaScheduler.Scheduler;
 
-namespace ArmaSheduler
+namespace ArmaScheduler
 {
-    public partial class ArmaSheduler : ServiceBase
+    public partial class ArmaScheduler : ServiceBase
     {
-        public ArmaSheduler()
+        public ArmaScheduler()
         {
             InitializeComponent();
         }

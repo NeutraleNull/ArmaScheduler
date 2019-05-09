@@ -1,13 +1,13 @@
-﻿using ArmaSheduler.models;
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using ArmaScheduler.Models;
 
-namespace ArmaSheduler.parser
+namespace ArmaScheduler.Parser
 {
     public static class Validator
     {
@@ -32,8 +32,8 @@ namespace ArmaSheduler.parser
             Console.WriteLine($"Reapting {model.settings.repeat} times until terminate");
             Console.WriteLine("--------------------------------------------------------");
             Console.WriteLine("Scanning shedule tasks ");
-            if(model.sheduledTasks == null) Console.WriteLine("No shedule tasks found!");
-            foreach (var item in model.sheduledTasks)
+            if(model.scheduledTasks == null) Console.WriteLine("No shedule tasks found!");
+            foreach (var item in model.scheduledTasks)
             {
                 Console.WriteLine($"Task at {item.time.ToString()}\n#RCON command: {item.rconCommand}\nExecute task: {item.executeTask.ToString()}\n");
             }
