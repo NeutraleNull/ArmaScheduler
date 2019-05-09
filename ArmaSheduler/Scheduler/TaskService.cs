@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace ArmaSheduler.Sheduler
+namespace ArmaScheduler.Scheduler
 {
     public class TaskService
     {
-        private static TaskService taskService;
-        private List<Timer> timers = new List<Timer>();
+        private static TaskService _taskService;
+        private readonly List<Timer> _timers = new List<Timer>();
 
-        public static TaskService Instance => taskService ?? (taskService = new TaskService());
+        public static TaskService Instance => _taskService ?? (_taskService = new TaskService());
 
         private TaskService()
         {
@@ -33,7 +33,7 @@ namespace ArmaSheduler.Sheduler
             {
                 task.Invoke();
             }, null, timeToGo, TimeSpan.FromHours(intervalInHour));
-            timers.Add(timer);
+            _timers.Add(timer);
         }
     }
 }

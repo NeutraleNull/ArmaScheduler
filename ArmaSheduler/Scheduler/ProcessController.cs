@@ -1,34 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmaSheduler.Sheduler
+namespace ArmaScheduler.Scheduler
 {
     public class ProcessController
     {
-        private readonly string executable;
-        private readonly string parameter;
-        private Process process;
-        private bool stopped;
+        private readonly string _executable;
+        private readonly string _parameter;
+        private readonly Process _process;
+        private bool _stopped;
 
         public ProcessController(string executable, string parameter)
         {
-            this.executable = executable;
-            this.parameter = parameter;
-            process = new Process
+            this._executable = executable;
+            this._parameter = parameter;
+            _process = new Process
             {
                 StartInfo = new ProcessStartInfo(executable, parameter)
             };
-            process.Exited += Process_Exited;
-            stopped = true;
+            _process.Exited += Process_Exited;
+            _stopped = true;
         }
 
         private void Process_Exited(object sender, EventArgs e)
         {
-            if (stopped) return;
+            if (_stopped) return;
             Console.WriteLine("Process has crashed... Will restart soon");
             Task.Delay(1000 * 2);
             Start();
@@ -43,21 +40,21 @@ namespace ArmaSheduler.Sheduler
 
         public void Stop()
         {
-            stopped = true;
-            process.Kill();
+            _stopped = true;
+            _process.Kill();
         }
 
         public void Start()
         {
             try
             {
-                process.Start();
+                _process.Start();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Failed to start server, see more:\n{ex}");
             }
-            stopped = false;
+            _stopped = false;
         }
     }
 }

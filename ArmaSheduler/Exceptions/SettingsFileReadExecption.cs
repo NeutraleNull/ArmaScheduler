@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmaSheduler.Exceptions
+namespace ArmaScheduler.Exceptions
 {
     class SettingsFileReadException : Exception
     {

@@ -1,6 +1,6 @@
-﻿namespace ArmaSheduler
+﻿namespace ArmaScheduler
 {
-    partial class ArmaSheduler
+    partial class ArmaScheduler
     {
         /// <summary> 
         /// Erforderliche Designervariable.

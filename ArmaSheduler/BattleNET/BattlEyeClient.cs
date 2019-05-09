@@ -14,7 +14,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     public class BattlEyeClient
     {
