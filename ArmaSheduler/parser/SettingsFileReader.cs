@@ -25,7 +25,7 @@ namespace ArmaSheduler.parser
                     try
                     {
                         file = JsonConvert.DeserializeObject<JsonModel>(reader.ReadToEnd());
-                        Validator.ValidateJsonModel(file);
+                        Validator.ValidateJsonModel(ref file);
                     }
                     catch
                     {
@@ -70,6 +70,9 @@ namespace ArmaSheduler.parser
                     hcParameter = "-client -connect=127.0.0.1 -port=2302 -autoinit -bla -da",
                     serverParameter = "-cpuCount=4 -autoinit",
                     repeat = 100,
+                    ip = "127.0.0.1",
+                    port = 2307,
+                    password = "igbinkenpassword",
                     timeout = 100               
                 };
                 string json = JsonConvert.SerializeObject(file);
