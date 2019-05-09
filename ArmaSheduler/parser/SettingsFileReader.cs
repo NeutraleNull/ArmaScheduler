@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ArmaSheduler.models;
-using ArmaSheduler.Exceptions;
+using ArmaScheduler.Exceptions;
 using Newtonsoft.Json;
 using System.Threading;
+using ArmaScheduler.Models;
 
-namespace ArmaSheduler.parser
+namespace ArmaScheduler.Parser
 {
-    class SettingsFileReader
+    public class SettingsFileReader
     {
         private static readonly string _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "setting.json");
         
@@ -51,14 +51,14 @@ namespace ArmaSheduler.parser
                     repeating = 1,
                     rconCommand = "#shutdown"
                 };
-                file.sheduledTasks = new Shedule[2];
-                file.sheduledTasks[0] = new Shedule
+                file.scheduledTasks = new Schedule[2];
+                file.scheduledTasks[0] = new Schedule
                 {
                     time = TimeSpan.Parse("10:00:00"),
                     executeTask = ExecutionTasks.restart,
                     rconCommand = "say -1 RESTART!"
                 };
-                file.sheduledTasks[1] = new Shedule
+                file.scheduledTasks[1] = new Schedule
                 {
                     time = TimeSpan.Parse("12:30:00"),
                     rconCommand = "say -1 In 30 Minuten ist restart"

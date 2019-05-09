@@ -1,4 +1,4 @@
-﻿using ArmaSheduler.parser;
+﻿using ArmaScheduler.Parser;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArmaSheduler
+namespace ArmaScheduler
 {
     static class Programs
     {
@@ -22,12 +22,11 @@ namespace ArmaSheduler
             AllocConsole();
             //SettingsFileReader reader = new SettingsFileReader();
             //reader.ReadSettingsFile();
-            ServiceBase[] ServicesToRun;
-            ServicesToRun = new ServiceBase[]
+            var servicesToRun = new ServiceBase[]
             {
-                new ArmaSheduler()
+                new ArmaScheduler()
             };
-            ServiceBase.Run(ServicesToRun);
+            ServiceBase.Run(servicesToRun);
             Console.WriteLine("Press any key to kill the console");
             Console.ReadKey();
         }

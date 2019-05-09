@@ -7,7 +7,7 @@
 
 using System;
 
-namespace BattleNET
+namespace ArmaSheduler.BattleNET
 {
     public delegate void BattlEyeConnectEventHandler(BattlEyeConnectEventArgs args);
     public delegate void BattlEyeDisconnectEventHandler(BattlEyeDisconnectEventArgs args);

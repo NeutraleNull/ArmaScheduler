@@ -1,4 +1,4 @@
-﻿namespace ArmaSheduler.models
+﻿namespace ArmaScheduler.Models
 {
     public enum ExecutionTasks
     {

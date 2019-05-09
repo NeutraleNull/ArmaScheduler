@@ -1,25 +1,22 @@
-﻿using ArmaSheduler.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BattleNET;
+﻿using System;
 using System.Net;
+using System.Threading.Tasks;
+using ArmaSheduler.BattleNET;
+using ArmaScheduler.Models;
 
-namespace ArmaSheduler.Sheduler
+namespace ArmaScheduler.Scheduler
 {
     public class RconConnector
     {
-        private static RconConnector connector;
-        private Settings settings;
-        private BattlEyeClient client;
+        private static RconConnector _connector;
+        private Settings _settings;
+        private BattlEyeClient _client;
         private readonly object _lock = new object();
 
         private RconConnector()
         {
-            client.BattlEyeDisconnected += Client_BattlEyeDisconnected;
-            client.BattlEyeConnected += Client_BattlEyeConnected;
+            _client.BattlEyeDisconnected += Client_BattlEyeDisconnected;
+            _client.BattlEyeConnected += Client_BattlEyeConnected;
         }
             
         private void Client_BattlEyeConnected(BattlEyeConnectEventArgs args)
@@ -27,9 +24,9 @@ namespace ArmaSheduler.Sheduler
             Task.Run(() =>
             {
                 Console.WriteLine("Connection to the server has been lost...\n Will try to reconnect now!");
-                for (int tries = 0; tries < settings.repeat; tries++)
+                for (int tries = 0; tries < _settings.repeat; tries++)
                 {
-                    Console.WriteLine($"Try {tries}/{settings.repeat}");
+                    Console.WriteLine($"Try {tries}/{_settings.repeat}");
                     int result = OpenConnection();
                     if (result == 0)
                     {
@@ -50,34 +47,30 @@ namespace ArmaSheduler.Sheduler
 
         public static RconConnector GetRconConnector()
         {
-            if(connector == null)
-            {
-                connector = new RconConnector();
-            }
-            return connector;
+            return _connector ?? (_connector = new RconConnector());
         }
         
         public void SetSettingsFile(Settings settings)
         {
-            this.settings = settings;
+            this._settings = settings;
         }
 
         public int OpenConnection()
         {
-            IPAddress.TryParse(settings.ip, out IPAddress address);
-            BattlEyeLoginCredentials credentials = new BattlEyeLoginCredentials
+            IPAddress.TryParse(_settings.ip, out IPAddress address);
+            var credentials = new BattlEyeLoginCredentials
             {
                 Host = address,
-                Port = settings.port,
-                Password = settings.password
+                Port = _settings.port,
+                Password = _settings.password
             };
             lock (_lock)
             {
-                client = new BattlEyeClient(credentials)
+                _client = new BattlEyeClient(credentials)
                 {
                     ReconnectOnPacketLoss = true
                 };
-                var result = client.Connect();
+                var result = _client.Connect();
                 if (result != 0)
                 {
                     Console.WriteLine("Connection to server failed");
@@ -90,8 +83,8 @@ namespace ArmaSheduler.Sheduler
         {
             lock(_lock)
             {
-                if(client.Connected)
-                    client.SendCommand(command, true);
+                if(_client.Connected)
+                    _client.SendCommand(command, true);
                 else
                     Console.WriteLine("Cannot send command... Not connected to server");
             }
@@ -99,7 +92,10 @@ namespace ArmaSheduler.Sheduler
 
         public void CloseConnection()
         {
-            client.Disconnect();
+            lock (_lock)
+            {
+                _client?.Disconnect();
+            }
         }
     }
 }
