@@ -28,7 +28,7 @@ settings:
 | *hcCount* | amount of headless clients the application is gonna start with the normal gameserver|
 | *serverExecutable* | path to server exectuable. Normally it looks like D:\Arma3\arma3_server64bit.exe|
 | *hcParameter*| headless client launch arguments |
-| *serverParameter | server launch arguments |
+| *serverParameter* | server launch arguments |
 
 Example setup:
 ```
