@@ -19,6 +19,7 @@ namespace ArmaScheduler.Scheduler
             {
                 StartInfo = new ProcessStartInfo(executable, parameter)
             };
+            _process.EnableRaisingEvents = true;
             _process.Exited += Process_Exited;
             _stopped = true;
         }
@@ -27,25 +28,28 @@ namespace ArmaScheduler.Scheduler
         {
             if (_stopped) return;
             Console.WriteLine("Process has crashed... Will restart soon");
-            Task.Delay(1000 * 2);
+            Task.Delay(1000 * 2).Wait();
             Start();
         }
 
         public void Restart()
         {
+            Console.WriteLine("Restarting server!");
             Stop();
-            Task.Delay(1000 * 2);
+            Task.Delay(1000 * 5).Wait();
             Start();
         }
 
         public void Stop()
         {
+            Console.WriteLine("Stopping server!");
             _stopped = true;
             _process.Kill();
         }
 
         public void Start()
         {
+            Console.WriteLine("Starting server!");
             try
             {
                 _process.Start();
