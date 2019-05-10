@@ -44,7 +44,7 @@ namespace ArmaScheduler.Parser
             {
                 Console.WriteLine($"Task delayed with {item.startupDelay}\n#RCON command:{item.rconCommand}\nExecute task: {item.executeTask.ToString()}\nReapting: {item.repeating} with {item.delay} seconds interval\n");
             }
-            Thread.Sleep(60 * 1000);
+            //Thread.Sleep(60 * 1000);
         }
     }
 }

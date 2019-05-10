@@ -15,11 +15,19 @@ namespace ArmaScheduler.Scheduler
 
         private RconConnector()
         {
-            _client.BattlEyeDisconnected += Client_BattlEyeDisconnected;
-            _client.BattlEyeConnected += Client_BattlEyeConnected;
+            
         }
             
         private void Client_BattlEyeConnected(BattlEyeConnectEventArgs args)
+        {
+            lock (_lock)
+            {
+                if(_client.Connected)
+                    Console.WriteLine("Connection reestablished");
+            }
+        }
+
+        private void Client_BattlEyeDisconnected(BattlEyeDisconnectEventArgs args)
         {
             Task.Run(() =>
             {
@@ -30,19 +38,14 @@ namespace ArmaScheduler.Scheduler
                     int result = OpenConnection();
                     if (result == 0)
                     {
-                        Console.WriteLine("Connection reastablished...");
+                        Console.WriteLine("Connection reestablished...");
                         return;
                     }
-                    Console.WriteLine("Connection could not be reastablished...");
-                    Task.Delay(1000 * 2);
+                    Console.WriteLine("Connection could not be reestablished...");
+                    Task.Delay(5000);
                 }
                 Environment.Exit(1);
             });
-        }
-
-        private void Client_BattlEyeDisconnected(BattlEyeDisconnectEventArgs args)
-        {
-            Console.WriteLine("Connection reastablished");
         }
 
         public static RconConnector GetRconConnector()
@@ -53,10 +56,6 @@ namespace ArmaScheduler.Scheduler
         public void SetSettingsFile(Settings settings)
         {
             this._settings = settings;
-        }
-
-        public int OpenConnection()
-        {
             IPAddress.TryParse(_settings.ip, out IPAddress address);
             var credentials = new BattlEyeLoginCredentials
             {
@@ -64,17 +63,41 @@ namespace ArmaScheduler.Scheduler
                 Port = _settings.port,
                 Password = _settings.password
             };
+            _client = new BattlEyeClient(credentials)
+            {
+                ReconnectOnPacketLoss = true
+            };
+            _client.BattlEyeDisconnected += Client_BattlEyeDisconnected;
+            _client.BattlEyeConnected += Client_BattlEyeConnected;
+        }
+
+        public int OpenConnection()
+        {
             lock (_lock)
             {
-                _client = new BattlEyeClient(credentials)
-                {
-                    ReconnectOnPacketLoss = true
-                };
                 var result = _client.Connect();
                 if (result != 0)
                 {
                     Console.WriteLine("Connection to server failed");
                 }
+
+                Task.Run(() =>
+                {
+                    Console.WriteLine("Connection to the server has been lost...\n Will try to reconnect now!");
+                    for (int tries = 0; tries < _settings.repeat; tries++)
+                    {
+                        Console.WriteLine($"Try {tries}/{_settings.repeat}");
+                        result = _client.Connect();
+                        if (result == 0)
+                        {
+                            Console.WriteLine("Connection established...");
+                            return;
+                        }
+                        Console.WriteLine("Connection could not be established...");
+                        Task.Delay(5 *1000).Wait();
+                    }
+                    Environment.Exit(1);
+                });
                 return (int)result;
             }
         }
