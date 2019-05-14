@@ -106,10 +106,16 @@ namespace ArmaScheduler.Scheduler
         {
             lock(_lock)
             {
-                if(_client.Connected)
+                if (_client.Connected)
                     _client.SendCommand(command, true);
                 else
-                    Console.WriteLine("Cannot send command... Not connected to server");
+                {
+                    OpenConnection();
+                    if (_client.Connected)
+                        _client.SendCommand(command, true);
+                    else
+                        Console.WriteLine("Cannot send command... Not connected to server");
+                }
             }
         }
 
