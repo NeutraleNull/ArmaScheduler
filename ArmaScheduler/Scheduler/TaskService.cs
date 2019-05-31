@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ArmaScheduler.Models;
+using Hangfire;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -6,34 +8,51 @@ namespace ArmaScheduler.Scheduler
 {
     public class TaskService
     {
-        private static TaskService _taskService;
-        private readonly List<Timer> _timers = new List<Timer>();
-
-        public static TaskService Instance => _taskService ?? (_taskService = new TaskService());
-
-        private TaskService()
+        public void ExecuteRcon(string command)
         {
-
+            var rcon = RconConnector.GetRconConnector();
+            rcon.AddCommandToQueue(command);
         }
 
-        public void ScheduleTask(int hour, int min, double intervalInHour, Action task)
+        public void RecurringRcon(RepeatingService item)
         {
-            DateTime now = DateTime.Now;
-            DateTime firstRun = new DateTime(now.Year, now.Month, now.Day, hour, min, 0, 0);
-            if (now > firstRun)
+            ExecuteRcon(item.rconCommand);
+            if (item.repeating > -1)
             {
-                firstRun = firstRun.AddDays(1);
+                BackgroundJob.Schedule<TaskService>(x => x.RecurringRcon(item), TimeSpan.FromMinutes(item.delay));
+                return;
             }
-            TimeSpan timeToGo = firstRun - now;
-            if (timeToGo <= TimeSpan.Zero)
+            if (item.repeating == 0) return;
+            if (item.repeating > 0)
             {
-                timeToGo = TimeSpan.Zero;
+                item.repeating--;
+                BackgroundJob.Schedule<TaskService>(x => x.RecurringRcon(item), TimeSpan.FromMinutes(item.delay));
             }
-            var timer = new Timer(x =>
+        }
+
+        public void RestartServer(ExecutionTasks executionTasks)
+        {
+            switch (executionTasks)
             {
-                task.Invoke();
-            }, null, timeToGo, TimeSpan.FromHours(intervalInHour));
-            _timers.Add(timer);
+                case ExecutionTasks.start:
+                {
+                    var armaServer = ArmaServer.GetInstance();
+                    armaServer.StartAll();
+                    break;
+                }
+                case ExecutionTasks.stop:
+                {
+                    var armaServer = ArmaServer.GetInstance();
+                    armaServer.StopAll();
+                    break;
+                }
+                case ExecutionTasks.restart:
+                {
+                    var armaServer = ArmaServer.GetInstance();
+                    armaServer.RestartAll();
+                    break;
+                }
+            }
         }
     }
 }

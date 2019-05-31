@@ -1,16 +1,10 @@
 ﻿using ArmaScheduler.Parser;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Configuration.Install;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using ArmaScheduler.Exceptions;
 using ArmaScheduler.Scheduler;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using Microsoft.Owin.Hosting;
 
 namespace ArmaScheduler
 {
@@ -21,6 +15,19 @@ namespace ArmaScheduler
         /// </summary>
         static void Main(String[] args)
         {
+            _ = GlobalConfiguration.Configuration
+                .UseColouredConsoleLogProvider()
+                .UseMemoryStorage();
+            MemoryStorageOptions options = new MemoryStorageOptions();
+           // options.JobExpirationCheckInterval = TimeSpan.FromSeconds(30);
+           // options.FetchNextJobTimeout = TimeSpan.FromSeconds(30);
+          
+
+            JobStorage.Current = new MemoryStorage(options);
+
+            string baseAddress = "http://localhost:9000/";
+            WebApp.Start<Startup>(url: baseAddress);
+
             try
             {
                 SettingsFileReader reader = new SettingsFileReader();
@@ -35,6 +42,7 @@ namespace ArmaScheduler
                 var rcon = RconConnector.GetRconConnector();
                 rcon.SetSettingsFile(settingsFile.settings);
                 rcon.OpenConnection();
+                rcon.StartQueueWorker();
 
                 TaskCreator.CreateTasks(settingsFile);
                 armaServer.StartAll();
@@ -54,6 +62,8 @@ namespace ArmaScheduler
                 Console.WriteLine(e);
                 Console.ReadKey();
             }
+
+            
         }
     }
 }
