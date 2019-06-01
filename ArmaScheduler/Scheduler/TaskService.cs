@@ -30,6 +30,22 @@ namespace ArmaScheduler.Scheduler
             }
         }
 
+        public void ReccuringRestart(RepeatingService item)
+        {
+            RestartServer(item.executeTask);
+            if(item.repeating > -1)
+            {
+                BackgroundJob.Schedule<TaskService>(x => x.ReccuringRestart(item), TimeSpan.FromMinutes(item.delay));
+                return;
+            }
+            if (item.repeating == 0) return;
+            if (item.repeating > 0)
+            {
+                item.repeating--;
+                BackgroundJob.Schedule<TaskService>(x => x.ReccuringRestart(item), TimeSpan.FromMinutes(item.delay));
+            }
+        }
+
         public void RestartServer(ExecutionTasks executionTasks)
         {
             switch (executionTasks)
