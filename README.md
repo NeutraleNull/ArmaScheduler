@@ -12,23 +12,25 @@ It features:
   - more to come
 
 ### How to use
-run the ArmaScheduler.exe application. On your first start an settings.json will be automaticly generated and placed on the desktop for you.
+Run the ArmaScheduler.exe application. On your first start an settings.json will be automaticly generated and placed on the desktop for you.
 ArmaScheduler will always try to read the settings file from the desktop at the moment.
 
 ### Json settings
 
 settings:
-| Item | Description |
-|----------- |------------|
-| *ip* | IP Adress RCON is reachable |
-| *port* | Port RCON is reachable |
-| *password* | RCON passowrd |
-| *repeat* | How many times the programm will try to reconnect to the server via RCON before terminating |
-| *timeout* | `not used atm` |
-| *hcCount* | amount of headless clients the application is gonna start with the normal gameserver|
-| *serverExecutable* | path to server exectuable. Normally it looks like D:\Arma3\arma3_server64bit.exe|
-| *hcParameter*| headless client launch arguments |
-| *serverParameter* | server launch arguments |
+| Item             	| Description                                                                                            	|
+|------------------	|--------------------------------------------------------------------------------------------------------	|
+| ip               	| IP Adress RCON of your Arma server is reachable                                                        	|
+| port             	| Port RCON of your Arma server is reachable                                                             	|
+| password         	| RCON password                                                                                          	|
+| repeat           	| How many times the programm will try to reconnect to the server via RCON before terminating            	|
+| timeout          	| `not used atm`                                                                                         	|
+| hcCount          	| amount of headless clients the application is going to start together with your gameserver             	|
+| serverExecutable 	| path to your server executable including full name. A path looks like D:\\Arma3\\arma3_server64bit.exe 	|
+| hcParameter      	| headless client launch arguments                                                                       	|
+| serverParameter  	| server launch arguments                                                                                	|
+
+Make sure if you use a path together with json you are using double \ (C:\\bla\\here\\myapplication.exe)
 
 Example setup:
 ```
@@ -148,17 +150,16 @@ Example setup:
 
 ### Tech
 
-you will need an .NetFramework 4.6 or newer installed on your server to run this software.
-It could be made ready for .NetCore but i leave this up to you fellow readers.
+ArmaScheduler now runs Hangfire as it's CRON background scheduler. It uses an in memory database to avoid the need of a real SQL database because each job will be read on application start
 
 
 ### Installation
 
-Dillinger requires [.Net Framework v.4.6.1](https://dotnet.microsoft.com/download/thank-you/net462) or higher to run.
+ArmaScheduler will require [.Net Framework v.4.6.1](https://dotnet.microsoft.com/download/thank-you/net462) or higher to run.
 
 ### Build
 
-Just load the project in visual studio 2017 or higher and build it yourself!
+Just load the project in visual studio 2017 or higher and build it yourself! The build binary will contain all of it's needed .dll files. No need to copy them all. Just copy the .exe to your desired place.
 
 License
 ----
