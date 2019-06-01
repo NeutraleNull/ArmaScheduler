@@ -19,7 +19,6 @@ ArmaScheduler will always try to read the settings file from the desktop at the 
 
 settings:
 | Item             	| Description                                                                                            	|
-|------------------	|--------------------------------------------------------------------------------------------------------	|
 | ip               	| IP Adress RCON of your Arma server is reachable                                                        	|
 | port             	| Port RCON of your Arma server is reachable                                                             	|
 | password         	| RCON password                                                                                          	|
