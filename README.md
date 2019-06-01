@@ -18,12 +18,14 @@ ArmaScheduler will always try to read the settings file from the desktop at the 
 ### Json settings
 
 settings:
+
 | Item             	| Description                                                                                            	|
+|------------------	|--------------------------------------------------------------------------------------------------------	|
 | ip               	| IP Adress RCON of your Arma server is reachable                                                        	|
 | port             	| Port RCON of your Arma server is reachable                                                             	|
 | password         	| RCON password                                                                                          	|
 | repeat           	| How many times the programm will try to reconnect to the server via RCON before terminating            	|
-| timeout          	| not used atm                                                                                     	        |
+| timeout          	| *not used atm*                                                                                     	    |
 | hcCount          	| amount of headless clients the application is going to start together with your gameserver             	|
 | serverExecutable 	| path to your server executable including full name. A path looks like D:\\Arma3\\arma3_server64bit.exe 	|
 | hcParameter      	| headless client launch arguments                                                                       	|
@@ -149,7 +151,7 @@ Example setup:
 
 ### Tech
 
-ArmaScheduler now runs Hangfire as it's CRON background scheduler. It uses an in memory database to avoid the need of a real SQL database because each job will be read on application start
+ArmaScheduler now runs Hangfire as it's CRON background scheduler. It uses an in memory database to avoid the need of a real SQL database because each job will be read on application start.
 
 
 ### Installation
