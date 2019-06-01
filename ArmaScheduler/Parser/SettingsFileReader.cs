@@ -61,7 +61,7 @@ namespace ArmaScheduler.Parser
                 file.scheduledTasks[1] = new Schedule
                 {
                     time = TimeSpan.Parse("12:30:00"),
-                    rconCommand = "say -1 In 30 Minuten ist restart"
+                    rconCommand = "say -1 Restart will be in 30 min"
                 };
                 file.settings = new Settings
                 {
@@ -72,7 +72,7 @@ namespace ArmaScheduler.Parser
                     repeat = 100,
                     ip = "127.0.0.1",
                     port = 2307,
-                    password = "igbinkenpassword",
+                    password = "iamnotanrconpassword",
                     timeout = 100               
                 };
                 string json = JsonConvert.SerializeObject(file);
