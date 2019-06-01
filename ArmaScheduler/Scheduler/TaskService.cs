@@ -17,7 +17,7 @@ namespace ArmaScheduler.Scheduler
         public void RecurringRcon(RepeatingService item)
         {
             ExecuteRcon(item.rconCommand);
-            if (item.repeating > -1)
+            if (item.repeating == -1)
             {
                 BackgroundJob.Schedule<TaskService>(x => x.RecurringRcon(item), TimeSpan.FromMinutes(item.delay));
                 return;
@@ -33,7 +33,7 @@ namespace ArmaScheduler.Scheduler
         public void ReccuringRestart(RepeatingService item)
         {
             RestartServer(item.executeTask);
-            if(item.repeating > -1)
+            if(item.repeating == -1)
             {
                 BackgroundJob.Schedule<TaskService>(x => x.ReccuringRestart(item), TimeSpan.FromMinutes(item.delay));
                 return;
