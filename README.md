@@ -24,7 +24,7 @@ settings:
 | port             	| Port RCON of your Arma server is reachable                                                             	|
 | password         	| RCON password                                                                                          	|
 | repeat           	| How many times the programm will try to reconnect to the server via RCON before terminating            	|
-| timeout          	| `not used atm`                                                                                         	|
+| timeout          	| not used atm                                                                                     	        |
 | hcCount          	| amount of headless clients the application is going to start together with your gameserver             	|
 | serverExecutable 	| path to your server executable including full name. A path looks like D:\\Arma3\\arma3_server64bit.exe 	|
 | hcParameter      	| headless client launch arguments                                                                       	|
