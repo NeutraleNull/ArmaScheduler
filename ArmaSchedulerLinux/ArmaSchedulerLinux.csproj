@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Hangfire.Core" Version="1.7.3" />
     <PackageReference Include="Hangfire.MemoryStorage" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.1.8" />
   </ItemGroup>
 
 </Project>
